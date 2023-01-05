@@ -1,8 +1,10 @@
+import Background from "./components/Background";
+
 const App = () => {
   return (
-    <div>
-      Enter
-    </div>
+    <Background>
+      
+    </Background>
   );
 }
 
