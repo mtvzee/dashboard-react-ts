@@ -22,6 +22,7 @@ const Background = ({ children }: Props) => {
         console.error(error);
       }
     };
+    // TODO:unsplashにプロジェクトを登録してアクセス制限の上限を上げる
     // getBackgroundImage();
   }, []);
 
@@ -30,6 +31,7 @@ const Background = ({ children }: Props) => {
       className="relative h-screen bg-center bg-no-repeat bg-cover"
       style={{
         backgroundImage:
+          // TODO:unsplashにプロジェクトを登録してアクセス制限の上限を上げて、URLを切り替える
           // `url(${image?.urls.full})`
           'url(https://source.unsplash.com/random)',
       }}
