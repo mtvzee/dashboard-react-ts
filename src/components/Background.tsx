@@ -22,13 +22,17 @@ const Background = ({ children }: Props) => {
         console.error(error);
       }
     };
-    getBackgroundImage();
+    // getBackgroundImage();
   }, []);
 
   return (
     <div
       className="relative h-screen bg-center bg-no-repeat bg-cover"
-      style={{ backgroundImage: `url(${image?.urls.full})` }}
+      style={{
+        backgroundImage:
+          // `url(${image?.urls.full})`
+          'url(https://source.unsplash.com/random)',
+      }}
     >
       {children}
     </div>
