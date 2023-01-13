@@ -27,7 +27,9 @@ const SearchBar = () => {
         onChange={(e) => setQuery(e.target.value)}
         className="flex-auto bg-transparent outline-none h-[60px] px-4 text-3xl"
       />
-      <AiOutlineSearch className="flex-none w-9 h-9" />
+      <button>
+        <AiOutlineSearch className="flex-none w-9 h-9" />
+      </button>
     </form>
   );
 };
