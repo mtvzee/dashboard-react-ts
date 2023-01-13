@@ -18,7 +18,7 @@ const Weather = () => {
   }, []);
 
   return (
-    <div className="absolute top-4 right-4 w-[120px] h-[56px] drop-shadow-primary">
+    <div className="absolute top-0 right-0 w-[140px] h-[72px] pt-4 pr-4 drop-shadow-primary">
       <div className="relative h-[32px]">
         <img
           src={`https://api.openweathermap.org/img/w/${weatherData?.weather[0].icon.replace(
@@ -28,7 +28,9 @@ const Weather = () => {
           alt="天気のマーク"
           className="absolute -top-[6px] left-1 w-12 h-12"
         />
-        <div className="absolute top-0 right-0 text-2xl">24.4℃</div>
+        <div className="absolute top-0 right-0 text-2xl">
+          {weatherData?.main.temp.toFixed(1)}℃
+        </div>
       </div>
       <div className=" text-right">{weatherData?.name}</div>
     </div>
