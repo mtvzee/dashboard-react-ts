@@ -19,7 +19,7 @@ const SearchBar = () => {
       className="absolute bottom-[150px] left-1/2 -translate-x-1/2 flex items-center  rounded-full w-[600px] h-[60px] px-4 overflow-hidden"
       onSubmit={(e) => handleSubmit(e)}
     >
-      <div className="absolute inset-0 -z-20 bg-black/20 " />
+      <div className="absolute inset-0 -z-20 bg-black/20 backdrop-blur-md " />
       <AiOutlineGoogle className="flex-none w-9 h-9 " />
       <input
         type="search"
