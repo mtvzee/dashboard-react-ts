@@ -36,7 +36,7 @@ const Background = ({ children }: Props) => {
           'url(https://source.unsplash.com/random)',
       }}
     >
-      <div className="absolute inset-0 bg-radial" />
+      <div className="absolute inset-0 bg-radial"/>
       {children}
     </div>
   );
