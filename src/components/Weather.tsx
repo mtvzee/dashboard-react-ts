@@ -18,7 +18,7 @@ const Weather = () => {
   }, []);
 
   return (
-    <div className="absolute top-0 right-0 w-[140px] h-[72px] pt-4 pr-4 drop-shadow-primary ">
+    <div className="absolute top-0 right-0 w-[140px] h-[72px] pt-4 pr-4 drop-shadow-one ">
       <div className="relative h-[32px]">
         <img
           src={`https://api.openweathermap.org/img/w/${weatherData?.weather[0].icon.replace(

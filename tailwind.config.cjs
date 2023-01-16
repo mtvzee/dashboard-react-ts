@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       dropShadow: {
-        primary: '2px 2px 2px rgba(0, 0, 0, 0.3)',
+        one: '1px 1px 1px rgba(0, 0, 0, 0.3)',
+        two: '2px 2px 2px rgba(0, 0, 0, 0.3)',
       },
     },
   },

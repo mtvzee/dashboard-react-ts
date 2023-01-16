@@ -10,7 +10,7 @@ const Clock = () => {
   }, []);
 
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 drop-shadow-primary">
+    <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 drop-shadow-two">
       <div className="text-[10rem] leading-none text-center ">
         {date.format('HH:mm')}
       </div>
