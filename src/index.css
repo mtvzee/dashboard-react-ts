@@ -16,3 +16,12 @@
     );
   }
 }
+
+@layer utilities {
+  .clip-path-hidden {
+    clip-path: circle(0px at 100% 100%);
+  }
+  .clip-path-visible {
+    clip-path: circle(1000px at 100% 100%);
+  }
+}
