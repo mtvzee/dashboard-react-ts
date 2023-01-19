@@ -20,7 +20,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
     inputRef.current?.focus();
   }, [isEditing]);
 
-  // todoを完了した時
+  // todoを完了状態にする
   const handleComplete = (id: number) => {
     setTodoList(
       todoList.map((todo) => {
@@ -35,12 +35,11 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
     );
   };
 
-  // 削除ボタンを押した時
-  const handleDelete = (id: number) => {
+  const handleDeleteBtn = (id: number) => {
     setTodoList(todoList.filter((todo) => todo.id !== id));
   };
 
-  // todoを編集してエンターキーを押した時
+  // todoを編集してエンターキーを押したときに、TODOリストの内容を変更する
   const handleEnterKey = (
     id: number,
     e: React.KeyboardEvent<HTMLInputElement>
@@ -61,11 +60,11 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
     }
   };
   return (
-    <li className="flex items-center" onClick={() => handleComplete(id)}>
+    <li className="flex items-center group" onClick={() => handleComplete(id)}>
       <input
         type="text"
-        className={`flex-auto outline-none bg-transparent ${
-          isCompleted && 'line-through decoration-2 text-[#cbcbcb]'
+        className={`flex-auto outline-none bg-transparent cursor-pointer focus:border-b ${
+          isCompleted && 'line-through decoration-2 text-[#777777]'
         }`}
         value={editedText}
         onChange={(e) => setEditedText(e.target.value)}
@@ -73,12 +72,15 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
         onKeyDown={(e) => handleEnterKey(id, e)}
         ref={inputRef}
       />
-      <div onClick={(e) => e.stopPropagation()}>
-        <button className="" onClick={() => handleDelete(id)}>
-          <AiOutlineDelete />
+      <div
+        className="invisible opacity-0 transition duration-300  group-hover:visible group-hover:opacity-100 text-[#777777]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button onClick={() => handleDeleteBtn(id)}>
+          <AiOutlineDelete className="w-6 h-6 hover:text-white" />
         </button>
         <button onClick={() => setIsEditing(!isEditing)}>
-          <AiOutlineEdit />
+          <AiOutlineEdit className="w-6 h-6 hover:text-white" />
         </button>
       </div>
     </li>

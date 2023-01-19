@@ -1,34 +1,46 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { ShowModalContext } from '../context/ShowModalContext';
 import { TodoData } from '../types/todo';
 import Todo from './Todo';
 
 const TodoList = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [todoForm, setTodoForm] = useState('');
+  const [input, setInput] = useState('');
   const [todoList, setTodoList] = useState<TodoData[]>(
     JSON.parse(localStorage.getItem('todoList') ?? '')
   );
-  const todoFormRef = useRef<HTMLInputElement>(null);
+  const { showModal, setShowModal } = useContext(ShowModalContext);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleShowTodo = () => {
-    setIsOpen(!isOpen);
-    todoFormRef.current?.focus();
+  //
+  const handleToggleTodo = () => {
+    if (showModal) {
+      setShowModal({
+        links: showModal.links,
+        weather: showModal.weather,
+        todo: !showModal?.todo,
+      });
+    }
+    // モーダルを開く時のみinputにフォーカスする
+    if (showModal?.todo) {
+      inputRef.current?.focus();
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAddTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!todoForm) return;
+    if (!input) return;
     setTodoList([
       ...todoList,
       {
         id: Math.floor(Math.random() * 1000),
-        text: todoForm,
+        text: input,
         isCompleted: false,
       },
     ]);
-    setTodoForm('');
+    setInput('');
   };
 
+  // ローカルストレージにTODOリストの配列を文字列に変換して保存
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
   }, [todoList]);
@@ -37,19 +49,19 @@ const TodoList = () => {
     <div className="absolute bottom-0 right-0 mr-4 mb-4">
       <button
         className="drop-shadow-one text-xl block ml-auto"
-        onClick={handleShowTodo}
+        onClick={handleToggleTodo}
       >
         Todo
       </button>
       <div
-        className={`absolute bottom-0 right-0 min-w-[300px] bg-black  rounded-md ${
-          isOpen
+        className={`absolute bottom-0 right-0 min-w-[350px] bg-black  rounded-md ${
+          showModal?.todo
             ? '[clip-path:circle(1000px_at_100%_100%)]'
             : '[clip-path:circle(0_at_100%_100%)]'
         } transition-[clip-path] duration-700`}
       >
-        <div className="p-2">
-          <ul>
+        <div className="p-4 pb-2">
+          <ul className="space-y-1 pb-2">
             {todoList.map((todo) => (
               <Todo
                 key={todo.id}
@@ -61,23 +73,23 @@ const TodoList = () => {
               />
             ))}
           </ul>
-          <form onSubmit={(e) => handleSubmit(e)}>
+          <form onSubmit={(e) => handleAddTodo(e)}>
             <input
               type="text"
               placeholder="Todoを追加"
               className="w-full rounded-md p-1 outline-none bg-[#4c4c4c]"
-              ref={todoFormRef}
-              value={todoForm}
-              onChange={(e) => setTodoForm(e.target.value)}
+              ref={inputRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
             />
           </form>
         </div>
 
         <button
           className={`drop-shadow-one text-xl block ml-auto pr-2 duration-1000 ${
-            isOpen ? 'opacity-100' : 'opacity-0'
+            showModal?.todo ? 'opacity-100' : 'opacity-0'
           }`}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={handleToggleTodo}
         >
           Close
         </button>
