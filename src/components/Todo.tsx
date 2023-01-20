@@ -63,7 +63,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
     <li className="flex items-center group" onClick={() => handleComplete(id)}>
       <input
         type="text"
-        className={`flex-auto outline-none bg-transparent cursor-pointer focus:border-b ${
+        className={`flex-auto outline-none bg-transparent cursor-pointer transition hover:scale-105 focus:border-b ${
           isCompleted && 'line-through decoration-2 text-[#777777]'
         }`}
         value={editedText}
