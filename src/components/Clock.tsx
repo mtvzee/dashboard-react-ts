@@ -1,8 +1,10 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/ja';
 import { useEffect, useState } from 'react';
 
 const Clock = () => {
   const [date, setDate] = useState(dayjs());
+  dayjs.locale('ja');
 
   useEffect(() => {
     const timerId = setInterval(() => setDate(dayjs()), 1000);
@@ -11,12 +13,10 @@ const Clock = () => {
 
   return (
     <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 drop-shadow-two">
-      <div className="text-[10rem] leading-none text-center ">
-        {date.format('HH:mm')}
+      <div className="absolute -top-4 h-[64px] w-full text-center leading-[64px] text-[2.5rem] tracking-wider">
+        {date.format('M月D日 dddd')}
       </div>
-      <div className="text-[4rem] tracking-wider">
-        {date.format('YYYY/MM/DD(ddd)')}
-      </div>
+      <div className="text-[11rem]">{date.format('HH:mm')}</div>
     </div>
   );
 };
