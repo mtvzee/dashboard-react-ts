@@ -4,6 +4,7 @@ import { TodoData } from '../types/todo';
 import Todo from './Todo';
 import { MdClose } from 'react-icons/md';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { BsListTask } from 'react-icons/bs';
 
 const TodoList = () => {
   const [input, setInput] = useState('');
@@ -52,29 +53,28 @@ const TodoList = () => {
 
   return (
     <div className="absolute top-0 left-0 ml-4 mt-4">
-      <button
-        className="drop-shadow-one text-xl block ml-auto"
-        onClick={handleToggleTodo}
-      >
-        Todo
-      </button>
-
       <div
-        className={`absolute top-0 left-0 min-w-[350px] bg-black  rounded-md ${
+        className={`absolute top-0 left-0 min-w-[350px] bg-black/80   rounded-md ${
           showModal?.todo
-            ? '[clip-path:circle(1000px_at_0%_0%)]'
-            : '[clip-path:circle(0_at_0%_0%)]'
+            ? '[clip-path:circle(1000px_at_22px_22px)]'
+            : '[clip-path:circle(20px_at_22px_22px)]'
         } transition-[clip-path] duration-700`}
       >
         <div className="flex items-center justify-between p-2">
-          <button
-            className={`transition duration-1000  ${
-              showModal?.todo ? 'opacity-100' : 'opacity-0'
-            }`}
-            onClick={handleToggleTodo}
-          >
-            <MdClose className="w-7 h-7" />
-          </button>
+          {showModal.todo ? (
+            <button
+              className={`transition duration-1000  ${
+                showModal?.todo ? 'opacity-100' : 'opacity-0'
+              }`}
+              onClick={handleToggleTodo}
+            >
+              <MdClose className="w-7 h-7" />
+            </button>
+          ) : (
+            <button className="" onClick={handleToggleTodo}>
+              <BsListTask className="w-7 h-7" />
+            </button>
+          )}
           {todoList.some((todo) => todo.isCompleted) && (
             <button onClick={handleDeleteCompletedTodos}>
               <AiOutlineDelete className="w-7 h-7 text-orange-400" />
