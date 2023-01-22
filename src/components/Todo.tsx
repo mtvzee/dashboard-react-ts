@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md';
 import { TodoData } from '../types/todo';
 
 type Props = {
@@ -61,9 +62,16 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
   };
   return (
     <li className="flex items-center group" onClick={() => handleComplete(id)}>
+      <button className="mr-2">
+        {isCompleted ? (
+          <MdRadioButtonChecked className="text-orange-400" />
+        ) : (
+          <MdRadioButtonUnchecked />
+        )}
+      </button>
       <input
         type="text"
-        className={`flex-auto outline-none bg-transparent cursor-pointer transition hover:scale-105 focus:border-b ${
+        className={`flex-auto outline-none bg-transparent cursor-pointer  focus:border-b ${
           isCompleted && 'line-through decoration-2 text-[#777777]'
         }`}
         value={editedText}
