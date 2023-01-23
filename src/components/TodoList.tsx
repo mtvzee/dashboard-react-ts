@@ -54,7 +54,7 @@ const TodoList = () => {
   return (
     <div className="absolute top-0 left-0 ml-4 mt-4">
       <div
-        className={`absolute top-0 left-0 min-w-[350px] bg-black/80   rounded-md ${
+        className={`absolute top-0 left-0 min-w-[350px] bg-black/40 backdrop-blur-md   rounded-md ${
           showModal?.todo
             ? '[clip-path:circle(1000px_at_22px_22px)]'
             : '[clip-path:circle(20px_at_22px_22px)]'
@@ -99,7 +99,7 @@ const TodoList = () => {
               <input
                 type="text"
                 placeholder="Todoを追加"
-                className="w-full rounded-md p-1 outline-none bg-[#4c4c4c]"
+                className="w-full rounded-md py-1 px-3 outline-none bg-black/60"
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
