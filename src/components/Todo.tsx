@@ -72,7 +72,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
       <input
         type="text"
         className={`flex-auto outline-none bg-transparent cursor-pointer  focus:border-b ${
-          isCompleted && 'line-through decoration-2 text-[#777777]'
+          isCompleted && 'text-[#bbbbbb]'
         }`}
         value={editedText}
         onChange={(e) => setEditedText(e.target.value)}
@@ -81,7 +81,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
         ref={inputRef}
       />
       <div
-        className="invisible opacity-0 transition duration-300  group-hover:visible group-hover:opacity-100 text-[#777777]"
+        className="invisible opacity-0 transition duration-300  group-hover:visible group-hover:opacity-100 text-[#cccccc]"
         onClick={(e) => e.stopPropagation()}
       >
         <button onClick={() => handleDeleteBtn(id)}>
