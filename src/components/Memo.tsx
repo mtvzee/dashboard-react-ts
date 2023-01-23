@@ -19,7 +19,7 @@ const Memo = () => {
   }, [memo]);
 
   return (
-    <div className="absolute bottom-0 right-0 pb-4 pr-4 ">
+    <div className="absolute bottom-4 right-4">
       <ReactTextareaAutosize
         placeholder="Memo"
         value={memo}

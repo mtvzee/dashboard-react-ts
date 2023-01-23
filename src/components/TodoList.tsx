@@ -52,7 +52,7 @@ const TodoList = () => {
   }, [todoList]);
 
   return (
-    <div className="absolute top-0 left-0 ml-4 mt-4">
+    <div className="absolute top-4 left-4">
       <div
         className={`absolute top-0 left-0 min-w-[350px] bg-black/40 backdrop-blur-md   rounded-md ${
           showModal?.todo
