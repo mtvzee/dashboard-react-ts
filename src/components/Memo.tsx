@@ -26,7 +26,7 @@ const Memo = () => {
         onChange={(e) => setMemo(e.target.value)}
         maxLength={100}
         maxRows={10}
-        className="min-w-[350px] bg-black/20 backdrop-blur-md py-1 px-5 outline-none rounded-md"
+        className="min-w-[350px] bg-black/40 backdrop-blur-md py-1 px-5 outline-none rounded-md "
       />
       {memo && (
         <button className="absolute top-[6px] right-5 z-10">
