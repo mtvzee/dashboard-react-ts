@@ -17,7 +17,6 @@ const TodoList = () => {
   const handleToggleTodo = () => {
     if (showModal) {
       setShowModal({
-        links: showModal.links,
         weather: showModal.weather,
         todo: !showModal?.todo,
       });
