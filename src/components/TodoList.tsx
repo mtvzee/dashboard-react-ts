@@ -53,7 +53,7 @@ const TodoList = () => {
   return (
     <div className="absolute top-4 left-4">
       <div
-        className={`absolute top-0 left-0 min-w-[350px] bg-black/40 backdrop-blur-md   rounded-md ${
+        className={`absolute top-0 left-0 min-w-[350px] bg-black/20 backdrop-blur-xl rounded-xl ${
           showModal?.todo
             ? '[clip-path:circle(1000px_at_22px_22px)]'
             : '[clip-path:circle(20px_at_22px_22px)]'
