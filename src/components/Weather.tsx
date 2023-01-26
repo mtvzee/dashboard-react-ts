@@ -40,15 +40,20 @@ const Weather = () => {
   // OpenWeatherのAPIを用いて天気の情報を取得する
   useEffect(() => {
     const fetchWeatherData = async () => {
+      // cityの状態が正しい都市名の時
       try {
         const res = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${
-            city || 'Tokyo'
-          }&appid=${import.meta.env.VITE_OW_API_KEY}&units=metric&lang=ja`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${
+            import.meta.env.VITE_OW_API_KEY
+          }&units=metric&lang=ja`
         );
         const data = await res.json();
+        if (!res.ok) {
+          throw new Error('都市名が間違っています');
+        }
         setWeatherData(data);
       } catch (error) {
+        // cityの状態が間違った都市名の時、東京都にリセットする
         const res = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=Tokyo&appid=${
             import.meta.env.VITE_OW_API_KEY
@@ -56,7 +61,7 @@ const Weather = () => {
         );
         const data = await res.json();
         setWeatherData(data);
-        // localStorage.setItem('cityName', 'Tokyo');
+        localStorage.setItem('cityName', 'Tokyo');
       }
     };
     fetchWeatherData();
