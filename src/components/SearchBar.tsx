@@ -16,10 +16,10 @@ const SearchBar = () => {
 
   return (
     <form
-      className="absolute bottom-[25%] left-1/2 -translate-x-1/2 flex items-center  rounded-full w-[600px] h-[60px] px-4 overflow-hidden shadow-[inset_0_0_0_2px_rgba(256,256,256)]"
+      className="absolute bottom-[25%] left-1/2 -translate-x-1/2 flex items-center  rounded-full w-[600px] h-[60px] px-4 overflow-hidden shadow-[inset_0_0_0_0.2px_rgba(256,256,256)]"
       onSubmit={(e) => handleSubmit(e)}
     >
-      <div className="absolute inset-0 -z-20 bg-black/20 backdrop-blur-md " />
+      <div className="absolute inset-0 -z-20 bg-black/20 backdrop-blur-xl " />
       <AiOutlineGoogle className="flex-none w-9 h-9 " />
       <input
         type="search"
