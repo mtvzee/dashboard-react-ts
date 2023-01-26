@@ -26,10 +26,10 @@ const Memo = () => {
         onChange={(e) => setMemo(e.target.value)}
         maxLength={100}
         maxRows={10}
-        className="min-w-[350px] bg-black/20 backdrop-blur-xl py-1 px-5 outline-none rounded-xl"
+        className="min-w-[350px] bg-black/20 backdrop-blur-xl py-2 px-6 outline-none rounded-xl"
       />
       {memo && (
-        <button className="absolute top-[6px] right-5 z-10">
+        <button className="absolute top-[10px] right-2 z-10">
           <MdClose className="w-5 h-5" onClick={() => setMemo('')} />
         </button>
       )}
