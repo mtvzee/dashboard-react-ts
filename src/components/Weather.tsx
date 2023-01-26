@@ -103,7 +103,7 @@ const Weather = () => {
             <div className="flex items-center space-x-2">
               <h2 className="text-xl">{weatherData.name}</h2>
               <button onClick={(e) => handleToggleEdit(e)}>
-                <AiOutlineEdit className="w-6 h-6 text-[#dddddd] hover:text-white" />
+                <AiOutlineEdit className="w-6 h-6 text-[#eeeeee] hover:text-white" />
               </button>
             </div>
           )}
@@ -128,11 +128,11 @@ const Weather = () => {
                   <span className="text-2xl">℃</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className="text-xl text-red-500">
+                  <div className="text-xl text-[#FD3201]">
                     {weatherData.main.temp_max.toFixed(1)}
                     <span className="text-base">℃</span>
                   </div>
-                  <div className="text-xl text-blue-400">
+                  <div className="text-xl text-[#0B38E4]">
                     {weatherData.main.temp_min.toFixed(1)}
                     <span className="text-base">℃</span>
                   </div>

@@ -81,7 +81,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
         ref={inputRef}
       />
       <div
-        className="invisible opacity-0 transition duration-300  group-hover:visible group-hover:opacity-100 text-[#cccccc]"
+        className="invisible opacity-0 transition duration-300  group-hover:visible group-hover:opacity-100 text-[#eeeeee]"
         onClick={(e) => e.stopPropagation()}
       >
         <button onClick={() => handleDeleteBtn(id)}>
