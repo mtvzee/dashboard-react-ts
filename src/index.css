@@ -8,14 +8,14 @@
   }
 }
 
-@layer components {
+/* @layer components {
   .bg-radial {
     background-image: radial-gradient(
       transparent 0% 85%,
       rgba(0, 0, 0, 0.2) 100%
     );
   }
-}
+} */
 
 @layer utilities {
   .clip-path-hidden {
