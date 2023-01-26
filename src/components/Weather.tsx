@@ -101,7 +101,7 @@ const Weather = () => {
             </div>
           ) : (
             <div className="flex items-center space-x-2">
-              <h2 className="text-2xl">{weatherData.name}</h2>
+              <h2 className="text-xl">{weatherData.name}</h2>
               <button onClick={(e) => handleToggleEdit(e)}>
                 <AiOutlineEdit className="w-6 h-6 text-[#dddddd] hover:text-white" />
               </button>
