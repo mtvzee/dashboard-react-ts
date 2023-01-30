@@ -23,17 +23,19 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
 
   // todoを完了状態にする
   const handleComplete = (id: number) => {
-    setTodoList(
-      todoList.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            isCompleted: !todo.isCompleted,
-          };
-        }
-        return todo;
-      })
-    );
+    setTimeout(() => {
+      setTodoList(
+        todoList.map((todo) => {
+          if (todo.id === id) {
+            return {
+              ...todo,
+              isCompleted: !todo.isCompleted,
+            };
+          }
+          return todo;
+        })
+      );
+    }, 500);
   };
 
   const handleDeleteBtn = (id: number) => {
@@ -71,9 +73,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
       </button>
       <input
         type="text"
-        className={`flex-auto outline-none bg-transparent cursor-pointer  focus:border-b ${
-          isCompleted && 'text-[#bbbbbb]'
-        }`}
+        className={`flex-auto outline-none bg-transparent cursor-pointer `}
         value={editedText}
         onChange={(e) => setEditedText(e.target.value)}
         disabled={!isEditing}

@@ -11,6 +11,7 @@ const TodoList = () => {
   const [todoList, setTodoList] = useState<TodoData[]>(
     JSON.parse(localStorage.getItem('todoList') ?? '')
   );
+  const [isDone, setIsDone] = useState(false);
   const { showModal, setShowModal } = useContext(ShowModalContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -22,7 +23,7 @@ const TodoList = () => {
       });
     }
     // モーダルを開く時のみinputにフォーカスする
-    if (showModal?.todo) {
+    if (!showModal?.todo) {
       inputRef.current?.focus();
     }
   };
@@ -59,10 +60,10 @@ const TodoList = () => {
             : '[clip-path:circle(20px_at_22px_22px)]'
         } transition-[clip-path] duration-700`}
       >
-        <div className="flex items-center justify-between p-2">
+        <div className="relative flex items-center justify-center p-2">
           {showModal.todo ? (
             <button
-              className={`transition duration-1000  ${
+              className={`absolute top-[9px] left-[9px] transition duration-1000  ${
                 showModal?.todo ? 'opacity-100' : 'opacity-0'
               }`}
               onClick={handleToggleTodo}
@@ -70,28 +71,52 @@ const TodoList = () => {
               <MdClose className="w-7 h-7" />
             </button>
           ) : (
-            <button className="" onClick={handleToggleTodo}>
+            <button
+              className="absolute top-[9px] left-[9px]"
+              onClick={handleToggleTodo}
+            >
               <BsListTask className="w-7 h-7" />
             </button>
           )}
-          {todoList.some((todo) => todo.isCompleted) && (
-            <button onClick={handleDeleteCompletedTodos}>
+          <div className="flex items-center">
+            <button
+              className={`w-[100px] rounded-md ${!isDone && 'bg-black/50'}`}
+              onClick={() => setIsDone(false)}
+            >
+              Todo
+            </button>
+            <button
+              className={`w-[100px] rounded-md shadow-[inset_0px_0px_8px_rgba(0,0,0,.3)] ${
+                isDone && 'bg-black/50'
+              }`}
+              onClick={() => setIsDone(true)}
+            >
+              Done
+            </button>
+          </div>
+          {todoList.some((todo) => todo.isCompleted) && isDone && (
+            <button
+              className="absolute top-2 right-2"
+              onClick={handleDeleteCompletedTodos}
+            >
               <AiOutlineDelete className="w-7 h-7 text-orange-400" />
             </button>
           )}
         </div>
         <div className="p-4 pt-0">
           <ul className="space-y-1 pb-2">
-            {todoList.map((todo) => (
-              <Todo
-                key={todo.id}
-                id={todo.id}
-                text={todo.text}
-                isCompleted={todo.isCompleted}
-                todoList={todoList}
-                setTodoList={setTodoList}
-              />
-            ))}
+            {todoList
+              .filter((todo) => (isDone ? todo.isCompleted : !todo.isCompleted))
+              .map((todo) => (
+                <Todo
+                  key={todo.id}
+                  id={todo.id}
+                  text={todo.text}
+                  isCompleted={todo.isCompleted}
+                  todoList={todoList}
+                  setTodoList={setTodoList}
+                />
+              ))}
           </ul>
           {todoList.length < 10 ? (
             <form onSubmit={(e) => handleAddTodo(e)}>
