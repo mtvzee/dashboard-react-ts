@@ -12,6 +12,7 @@ type Props = {
 };
 
 const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
+  const [isMoving, setIsMoving] = useState(false);
   const [editedText, setEditedText] = useState(text);
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -23,6 +24,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
 
   // todoを完了状態にする
   const handleComplete = (id: number) => {
+    setIsMoving(!isMoving);
     setTimeout(() => {
       setTodoList(
         todoList.map((todo) => {
@@ -35,7 +37,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
           return todo;
         })
       );
-    }, 500);
+    }, 1000);
   };
 
   const handleDeleteBtn = (id: number) => {
@@ -66,6 +68,12 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
     <li className="flex items-center group" onClick={() => handleComplete(id)}>
       <button className="mr-2">
         {isCompleted ? (
+          isMoving ? (
+            <MdRadioButtonUnchecked />
+          ) : (
+            <MdRadioButtonChecked className="text-orange-400" />
+          )
+        ) : isMoving ? (
           <MdRadioButtonChecked className="text-orange-400" />
         ) : (
           <MdRadioButtonUnchecked />

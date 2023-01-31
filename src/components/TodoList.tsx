@@ -60,34 +60,33 @@ const TodoList = () => {
             : '[clip-path:circle(20px_at_22px_22px)]'
         } transition-[clip-path] duration-700`}
       >
-        <div className="relative flex items-center justify-center p-2">
+        <button
+          className="absolute top-[9px] left-[9px] z-10"
+          onClick={handleToggleTodo}
+        >
           {showModal.todo ? (
-            <button
-              className={`absolute top-[9px] left-[9px] transition duration-1000  ${
-                showModal?.todo ? 'opacity-100' : 'opacity-0'
-              }`}
-              onClick={handleToggleTodo}
-            >
-              <MdClose className="w-7 h-7" />
-            </button>
+            <BsListTask className="w-7 h-7" />
           ) : (
-            <button
-              className="absolute top-[9px] left-[9px]"
-              onClick={handleToggleTodo}
-            >
-              <BsListTask className="w-7 h-7" />
-            </button>
+            <MdClose className="w-7 h-7" />
           )}
+        </button>
+        <header className="relative flex items-center justify-center p-2">
           <div className="flex items-center">
             <button
-              className={`w-[100px] rounded-md ${!isDone && 'bg-black/50'}`}
+              className={`w-[100px] rounded-md ${
+                !isDone
+                  ? 'text-orange-400 bg-[#333333]'
+                  : ' text-[#dddddd] hover:text-white'
+              }`}
               onClick={() => setIsDone(false)}
             >
               Todo
             </button>
             <button
-              className={`w-[100px] rounded-md shadow-[inset_0px_0px_8px_rgba(0,0,0,.3)] ${
-                isDone && 'bg-black/50'
+              className={`w-[100px] rounded-md ${
+                isDone
+                  ? 'text-orange-400 bg-[#333333]'
+                  : ' text-[#dddddd] hover:text-white'
               }`}
               onClick={() => setIsDone(true)}
             >
@@ -102,7 +101,7 @@ const TodoList = () => {
               <AiOutlineDelete className="w-7 h-7 text-orange-400" />
             </button>
           )}
-        </div>
+        </header>
         <div className="p-4 pt-0">
           <ul className="space-y-1 pb-2">
             {todoList

@@ -8,14 +8,22 @@
   }
 }
 
-/* @layer components {
-  .bg-radial {
+@layer components {
+  /* .bg-radial {
     background-image: radial-gradient(
       transparent 0% 85%,
       rgba(0, 0, 0, 0.2) 100%
     );
+  } */
+  .neumorphism-convex {
+    color: #bbb;
+    box-shadow: -5px -5px 10px #908d7a, 5px 5px 7px #24231e;
   }
-} */
+  .neumorphism-concave {
+    /* @apply text-orange-400; */
+    box-shadow: inset -5px -5px 10px #3a3831, inset 5px 5px 10px #7a7867;
+  }
+}
 
 @layer utilities {
   .clip-path-hidden {
