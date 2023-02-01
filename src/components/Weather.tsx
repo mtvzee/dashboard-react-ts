@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BiCurrentLocation } from 'react-icons/bi';
@@ -93,124 +94,139 @@ const Weather = () => {
 
   return (
     <div className="absolute top-4 right-4">
-      {showModal.weather ? (
-        // 詳細バージョン
-        <div
-          className="w-[400px] p-4 bg-black/20 backdrop-blur-xl rounded-xl cursor-pointer"
-          onClick={handleToggleData}
-        >
-          {isEditing ? (
-            <div className="relative">
-              <form onSubmit={(e) => handleSubmit(e)}>
-                <input
-                  type="text"
-                  placeholder="都市名（例：Yokohama）"
-                  className="w-full p-2 bg-black/50  rounded-md outline-none"
-                  onClick={(e) => e.stopPropagation()}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                />
-              </form>
-              <button
-                className="absolute top-1/2 -translate-y-1/2 right-8 text-[#cccccc] hover:text-white"
-                onClick={(e) => handleGetCurrentLocation(e)}
-              >
-                <BiCurrentLocation className="w-6 h-6" />
-              </button>
-              <button
-                className="absolute top-1/2 right-1 -translate-y-1/2 text-[#cccccc] hover:text-white"
-                onClick={(e) => handleToggleEdit(e)}
-              >
-                <MdClose className="w-6 h-6" />
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center space-x-2">
-              <h2 className="text-xl">{weatherData.name}</h2>
-              <button onClick={(e) => handleToggleEdit(e)}>
-                <AiOutlineEdit className="w-6 h-6 text-[#eeeeee] hover:text-white" />
-              </button>
-            </div>
-          )}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div>
-                <img
-                  src={`https://api.openweathermap.org/img/w/${weatherData.weather[0].icon.replace(
-                    'n',
-                    'd'
-                  )}.png`}
-                  alt="天気のマーク"
-                  className="w-[60px] h-[45px] object-cover"
-                />
-                <div className="text-center">
-                  {weatherData.weather[0].description}
+      <AnimatePresence initial={false} mode="wait">
+        {showModal.weather ? (
+          // 詳細バージョン
+          <motion.div
+            key="details"
+            initial={{ opacity: 0, x: 1000 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 1000 }}
+            transition={{ duration: 0.3 }}
+            className="w-[400px] p-4 bg-black/20 backdrop-blur-xl rounded-xl cursor-pointer"
+            onClick={handleToggleData}
+          >
+            {isEditing ? (
+              <div className="relative">
+                <form onSubmit={(e) => handleSubmit(e)}>
+                  <input
+                    type="text"
+                    placeholder="都市名（例：Yokohama）"
+                    className="w-full p-2 bg-black/50  rounded-md outline-none"
+                    onClick={(e) => e.stopPropagation()}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                  />
+                </form>
+                <button
+                  className="absolute top-1/2 -translate-y-1/2 right-8 text-[#cccccc] hover:text-white"
+                  onClick={(e) => handleGetCurrentLocation(e)}
+                >
+                  <BiCurrentLocation className="w-6 h-6" />
+                </button>
+                <button
+                  className="absolute top-1/2 right-1 -translate-y-1/2 text-[#cccccc] hover:text-white"
+                  onClick={(e) => handleToggleEdit(e)}
+                >
+                  <MdClose className="w-6 h-6" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <h2 className="text-xl">{weatherData.name}</h2>
+                <button onClick={(e) => handleToggleEdit(e)}>
+                  <AiOutlineEdit className="w-6 h-6 text-[#eeeeee] hover:text-white" />
+                </button>
+              </div>
+            )}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div>
+                  <img
+                    src={`https://api.openweathermap.org/img/w/${weatherData.weather[0].icon.replace(
+                      'n',
+                      'd'
+                    )}.png`}
+                    alt="天気のマーク"
+                    className="w-[60px] h-[45px] object-cover"
+                  />
+                  <div className="text-center">
+                    {weatherData.weather[0].description}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[42px] leading-[1.25]">
+                    {weatherData.main.temp}
+                    <span className="text-2xl">℃</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="text-xl text-[#FD3201]">
+                      {weatherData.main.temp_max.toFixed(1)}
+                      <span className="text-base">℃</span>
+                    </div>
+                    <div className="text-xl text-[#0B38E4]">
+                      {weatherData.main.temp_min.toFixed(1)}
+                      <span className="text-base">℃</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div>
-                <div className="text-[42px] leading-[1.25]">
-                  {weatherData.main.temp}
-                  <span className="text-2xl">℃</span>
+                <div>
+                  風速：
+                  <span className="text-lg">
+                    {weatherData.wind.speed.toFixed(1)}
+                  </span>
+                  m/s
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="text-xl text-[#FD3201]">
-                    {weatherData.main.temp_max.toFixed(1)}
-                    <span className="text-base">℃</span>
-                  </div>
-                  <div className="text-xl text-[#0B38E4]">
-                    {weatherData.main.temp_min.toFixed(1)}
-                    <span className="text-base">℃</span>
-                  </div>
+                <div>
+                  湿度：
+                  <span className="text-lg">{weatherData.main.humidity}</span>%
+                </div>
+                <div>
+                  体感：
+                  <span className="text-lg">
+                    {weatherData.main.feels_like.toFixed(1)}
+                  </span>
+                  ℃
+                </div>
+                <div>
+                  気圧：
+                  <span className="text-lg">{weatherData.main.pressure}</span>
+                  hPa
                 </div>
               </div>
             </div>
+          </motion.div>
+        ) : (
+          // 省略バージョン
+          <motion.div
+            key="outline"
+            initial={{ opacity: 0, x: 1000 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 1000 }}
+            transition={{ duration: 0.3 }}
+            className="min-w-[100px] py-2 flex flex-col items-center bg-black/40 backdrop-blur-md rounded-md cursor-pointer relative gap-[35px]"
+            onClick={handleToggleData}
+          >
+            <div>{weatherData.name}</div>
+            <img
+              src={`https://api.openweathermap.org/img/w/${weatherData.weather[0].icon.replace(
+                'n',
+                'd'
+              )}.png`}
+              alt="天気のマーク"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] object-cover"
+            />
             <div>
-              <div>
-                風速：
-                <span className="text-lg">
-                  {weatherData.wind.speed.toFixed(1)}
-                </span>
-                m/s
-              </div>
-              <div>
-                湿度：
-                <span className="text-lg">{weatherData.main.humidity}</span>%
-              </div>
-              <div>
-                体感：
-                <span className="text-lg">
-                  {weatherData.main.feels_like.toFixed(1)}
-                </span>
-                ℃
-              </div>
-              <div>
-                気圧：
-                <span className="text-lg">{weatherData.main.pressure}</span>hPa
-              </div>
+              <span className="text-2xl">
+                {weatherData.main.temp.toFixed(1)}
+              </span>
+              ℃
             </div>
-          </div>
-        </div>
-      ) : (
-        // 省略バージョン
-        <div
-          className="min-w-[100px] py-2 flex flex-col items-center bg-black/40 backdrop-blur-md rounded-md cursor-pointer relative gap-[35px]"
-          onClick={handleToggleData}
-        >
-          <div>{weatherData.name}</div>
-          <img
-            src={`https://api.openweathermap.org/img/w/${weatherData.weather[0].icon.replace(
-              'n',
-              'd'
-            )}.png`}
-            alt="天気のマーク"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] object-cover"
-          />
-          <div>
-            <span className="text-2xl">{weatherData.main.temp.toFixed(1)}</span>
-            ℃
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
