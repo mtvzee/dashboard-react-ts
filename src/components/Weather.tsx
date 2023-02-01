@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
+import { BiCurrentLocation } from 'react-icons/bi';
 import { MdClose } from 'react-icons/md';
 import { ShowModalContext } from '../context/ShowModalContext';
 import { WeatherData } from '../types/weather';
@@ -15,6 +16,24 @@ const Weather = () => {
     setShowModal({
       weather: !showModal.weather,
       todo: showModal?.todo,
+    });
+  };
+
+  const handleGetCurrentLocation = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+      const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${
+          coords.latitude
+        }&lon=${coords.longitude}&appid=${
+          import.meta.env.VITE_OW_API_KEY
+        }&units=metric&lang=ja`
+      );
+      const data = await res.json();
+      setWeatherData(data);
+      setIsEditing(false);
     });
   };
 
@@ -43,9 +62,9 @@ const Weather = () => {
       // cityの状態が正しい都市名の時
       try {
         const res = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${
-            import.meta.env.VITE_OW_API_KEY
-          }&units=metric&lang=ja`
+          `https://api.openweathermap.org/data/2.5/weather?q=${
+            city || 'Tokyo'
+          }&appid=${import.meta.env.VITE_OW_API_KEY}&units=metric&lang=ja`
         );
         const data = await res.json();
         if (!res.ok) {
@@ -93,10 +112,16 @@ const Weather = () => {
                 />
               </form>
               <button
-                className="absolute top-1/2 right-1 -translate-y-1/2"
+                className="absolute top-1/2 -translate-y-1/2 right-8 text-[#cccccc] hover:text-white"
+                onClick={(e) => handleGetCurrentLocation(e)}
+              >
+                <BiCurrentLocation className="w-6 h-6" />
+              </button>
+              <button
+                className="absolute top-1/2 right-1 -translate-y-1/2 text-[#cccccc] hover:text-white"
                 onClick={(e) => handleToggleEdit(e)}
               >
-                <MdClose className="w-7 h-7" />
+                <MdClose className="w-6 h-6" />
               </button>
             </div>
           ) : (
