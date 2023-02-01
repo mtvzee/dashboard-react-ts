@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import { ShowModal } from '../types/ShowModal';
+import { ShowModal } from '../types/showModal';
 
 type Props = {
   children: ReactNode;
