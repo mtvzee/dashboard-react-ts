@@ -3,8 +3,8 @@ import { ShowModalContext } from '../context/ShowModalContext';
 import { TodoData } from '../types/todo';
 import Todo from './Todo';
 import { MdClose } from 'react-icons/md';
-import { AiOutlineDelete } from 'react-icons/ai';
 import { BsListTask } from 'react-icons/bs';
+import TodoHeader from './TodoHeader';
 
 const TodoList = () => {
   const [input, setInput] = useState('');
@@ -15,7 +15,7 @@ const TodoList = () => {
   const { showModal, setShowModal } = useContext(ShowModalContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleToggleTodo = () => {
+  const handleToggleTodoModal = () => {
     if (showModal) {
       setShowModal({
         weather: showModal.weather,
@@ -26,10 +26,6 @@ const TodoList = () => {
     if (!showModal?.todo) {
       inputRef.current?.focus();
     }
-  };
-
-  const handleDeleteCompletedTodos = () => {
-    setTodoList(todoList.filter((todo) => !todo.isCompleted));
   };
 
   const handleAddTodo = (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,7 +58,7 @@ const TodoList = () => {
       >
         <button
           className="absolute top-[9px] left-[9px] z-10"
-          onClick={handleToggleTodo}
+          onClick={handleToggleTodoModal}
         >
           {showModal.todo ? (
             <BsListTask className="w-7 h-7" />
@@ -70,38 +66,12 @@ const TodoList = () => {
             <MdClose className="w-7 h-7" />
           )}
         </button>
-        <header className="relative flex items-center justify-center p-2">
-          <div className="flex items-center">
-            <button
-              className={`w-[100px] rounded-md ${
-                !isDone
-                  ? 'text-orange-400 bg-[#333333]'
-                  : ' text-[#dddddd] hover:text-white'
-              }`}
-              onClick={() => setIsDone(false)}
-            >
-              Todo
-            </button>
-            <button
-              className={`w-[100px] rounded-md ${
-                isDone
-                  ? 'text-orange-400 bg-[#333333]'
-                  : ' text-[#dddddd] hover:text-white'
-              }`}
-              onClick={() => setIsDone(true)}
-            >
-              Done
-            </button>
-          </div>
-          {todoList.some((todo) => todo.isCompleted) && isDone && (
-            <button
-              className="absolute top-2 right-2"
-              onClick={handleDeleteCompletedTodos}
-            >
-              <AiOutlineDelete className="w-7 h-7 text-orange-400" />
-            </button>
-          )}
-        </header>
+        <TodoHeader
+          todoList={todoList}
+          isDone={isDone}
+          setTodoList={setTodoList}
+          setIsDone={setIsDone}
+        />
         <div className="p-4 pt-0">
           <ul className="space-y-1 pb-2">
             {todoList
