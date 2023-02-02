@@ -87,20 +87,21 @@ const TodoList = () => {
                 />
               ))}
           </ul>
-          {todoList.length < 10 ? (
-            <form onSubmit={(e) => handleAddTodo(e)}>
-              <input
-                type="text"
-                placeholder="Todoを追加"
-                className="w-full rounded-md py-1 px-3 outline-none bg-black/60"
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-              />
-            </form>
-          ) : (
-            <div className="text-red-500">TODOの上限は10個です</div>
-          )}
+          {!isDone &&
+            (todoList.length < 10 ? (
+              <form onSubmit={(e) => handleAddTodo(e)}>
+                <input
+                  type="text"
+                  placeholder="Todoを追加"
+                  className="w-full rounded-md py-1 px-3 outline-none bg-black/60"
+                  ref={inputRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </form>
+            ) : (
+              <div className="text-red-500">Todoの上限は10個です</div>
+            ))}
         </div>
       </div>
     </div>
