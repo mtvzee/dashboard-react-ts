@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { WeatherData } from '../types/weather';
+import { motion } from "framer-motion";
+import { WeatherData } from "../types/weather";
 
 type Props = {
   weatherData: WeatherData | null;
@@ -7,6 +7,7 @@ type Props = {
 };
 
 const WeatherOutline = ({ weatherData, handleToggleData }: Props) => {
+  if (!weatherData) return <div></div>;
   return (
     <motion.div
       key="outline"
@@ -20,8 +21,8 @@ const WeatherOutline = ({ weatherData, handleToggleData }: Props) => {
       <div>{weatherData?.name}</div>
       <img
         src={`https://api.openweathermap.org/img/w/${weatherData?.weather[0].icon.replace(
-          'n',
-          'd'
+          "n",
+          "d"
         )}.png`}
         alt="天気のマーク"
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] object-cover"
