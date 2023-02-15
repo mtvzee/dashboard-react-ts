@@ -1,15 +1,15 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { ShowModalContext } from '../context/ShowModalContext';
-import { TodoData } from '../types/todo';
-import Todo from './Todo';
-import { MdClose } from 'react-icons/md';
-import { BsListTask } from 'react-icons/bs';
-import TodoHeader from './TodoHeader';
+import { useContext, useEffect, useRef, useState } from "react";
+import { ShowModalContext } from "../context/ShowModalContext";
+import { TodoData } from "../types/todo";
+import Todo from "./Todo";
+import { MdClose } from "react-icons/md";
+import { BsListTask } from "react-icons/bs";
+import TodoHeader from "./TodoHeader";
 
 const TodoList = () => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [todoList, setTodoList] = useState<TodoData[]>(
-    JSON.parse(localStorage.getItem('todoList') ?? '')
+    JSON.parse(localStorage.getItem("todoList") ?? "[]")
   );
   const [isDone, setIsDone] = useState(false);
   const { showModal, setShowModal } = useContext(ShowModalContext);
@@ -39,12 +39,12 @@ const TodoList = () => {
         isCompleted: false,
       },
     ]);
-    setInput('');
+    setInput("");
   };
 
   // ローカルストレージにTODOリストの配列を文字列に変換して保存
   useEffect(() => {
-    localStorage.setItem('todoList', JSON.stringify(todoList));
+    localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
 
   return (
@@ -52,8 +52,8 @@ const TodoList = () => {
       <div
         className={`absolute top-0 left-0 min-w-[350px] bg-black/20 backdrop-blur-xl rounded-xl ${
           showModal?.todo
-            ? '[clip-path:circle(1000px_at_22px_22px)]'
-            : '[clip-path:circle(20px_at_22px_22px)]'
+            ? "[clip-path:circle(1000px_at_22px_22px)]"
+            : "[clip-path:circle(20px_at_22px_22px)]"
         } transition-[clip-path] duration-700`}
       >
         <button
