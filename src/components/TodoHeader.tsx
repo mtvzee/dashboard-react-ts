@@ -1,5 +1,5 @@
-import { AiOutlineDelete } from 'react-icons/ai';
-import { TodoData } from '../types/todo';
+import { AiOutlineDelete } from "react-icons/ai";
+import { TodoData } from "../types/todo";
 
 type Props = {
   todoList: TodoData[];
@@ -14,27 +14,28 @@ const TodoHeader = ({ todoList, isDone, setTodoList, setIsDone }: Props) => {
   };
   return (
     <header className="relative flex items-center justify-center p-2">
-      <div className="flex items-center">
+      <div className="relative flex items-center">
         <button
-          className={`w-[100px] rounded-md ${
+          className={`todoHeaderBtn w-[100px] h-[24px] rounded-md z-10 ${
             !isDone
-              ? 'text-orange-400 bg-[#333333]'
-              : ' text-[#dddddd] hover:text-white'
+              ? "text-orange-400 active"
+              : " text-[#dddddd] hover:text-white"
           }`}
           onClick={() => setIsDone(false)}
         >
           Todo
         </button>
         <button
-          className={`w-[100px] rounded-md ${
+          className={`todoHeaderBtn w-[100px] h-[24px] rounded-md z-10 ${
             isDone
-              ? 'text-orange-400 bg-[#333333]'
-              : ' text-[#dddddd] hover:text-white'
+              ? "text-orange-400 active"
+              : " text-[#dddddd] hover:text-white"
           }`}
           onClick={() => setIsDone(true)}
         >
           Done
         </button>
+        <div className="indicator absolute top-0 left-0 w-[100px] h-[24px] rounded-md bg-[#333333] transition duration-300" />
       </div>
       {todoList.some((todo) => todo.isCompleted) && isDone && (
         <button

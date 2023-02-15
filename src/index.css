@@ -23,6 +23,12 @@
     /* @apply text-orange-400; */
     box-shadow: inset -5px -5px 10px #3a3831, inset 5px 5px 10px #7a7867;
   }
+  .todoHeaderBtn:nth-child(1).active ~ .indicator {
+    transform: translateX(calc(100px * 0));
+  }
+  .todoHeaderBtn:nth-child(2).active ~ .indicator {
+    transform: translateX(calc(100px * 1));
+  }
 }
 
 @layer utilities {
