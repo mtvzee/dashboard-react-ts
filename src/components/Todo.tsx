@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
-import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md';
-import { TodoData } from '../types/todo';
+import { memo, useEffect, useRef, useState } from "react";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
+import { TodoData } from "../types/todo";
 
 type Props = {
   id: number;
@@ -11,7 +11,7 @@ type Props = {
   setTodoList: React.Dispatch<React.SetStateAction<TodoData[]>>;
 };
 
-const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
+const Todo = memo(({ id, text, isCompleted, todoList, setTodoList }: Props) => {
   const [isMoving, setIsMoving] = useState(false);
   const [editedText, setEditedText] = useState(text);
   const [isEditing, setIsEditing] = useState(false);
@@ -48,7 +48,7 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
     id: number,
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       setTodoList(
         todoList.map((todo) => {
           if (todo.id === id) {
@@ -64,7 +64,10 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
     }
   };
   return (
-    <li className="flex items-center group" onClick={() => handleToggleComplete(id)}>
+    <li
+      className="flex items-center group"
+      onClick={() => handleToggleComplete(id)}
+    >
       <button className="mr-2">
         {isCompleted ? (
           isMoving ? (
@@ -100,6 +103,6 @@ const Todo = ({ id, text, isCompleted, todoList, setTodoList }: Props) => {
       </div>
     </li>
   );
-};
+});
 
 export default Todo;
