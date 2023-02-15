@@ -61,9 +61,9 @@ const TodoList = () => {
           onClick={handleToggleTodoModal}
         >
           {showModal.todo ? (
-            <BsListTask className="w-7 h-7" />
-          ) : (
             <MdClose className="w-7 h-7" />
+          ) : (
+            <BsListTask className="w-7 h-7" />
           )}
         </button>
         <TodoHeader
