@@ -34,8 +34,9 @@ const WeatherHeader = ({ weatherData, setWeatherData, setCity }: Props) => {
           import.meta.env.VITE_OW_API_KEY
         }&units=metric&lang=ja`
       );
-      const data = await res.json();
+      const data: WeatherData = await res.json();
       setWeatherData(data);
+      localStorage.setItem('cityName', data.name);
       setIsEditing(false);
     });
   };
