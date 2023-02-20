@@ -29,6 +29,45 @@
   .todoHeaderBtn:nth-child(2).active ~ .indicator {
     transform: translateX(calc(100px * 1));
   }
+
+  .radialMenuList {
+    position: absolute;
+    top: 0;
+    left: 0;
+    scale: 0;
+    transition: 0.5s;
+    transform-origin: 25px 115px;
+  }
+  .radialMenuList.show {
+    scale: 1;
+  }
+  .radialMenuList:nth-child(1) {
+    rotate: 0deg;
+    transition-delay: 0.1s;
+  }
+  .radialMenuList:nth-child(2) {
+    rotate: 45deg;
+    transition-delay: 0.2s;
+  }
+  .radialMenuList:nth-child(3) {
+    rotate: 90deg;
+    transition-delay: 0.3s;
+  }
+  .radialMenuAnchor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(256, 256, 256, 0.7);
+    border-radius: 50%;
+    transition: 0.5s;
+  }
+  .radialMenuAnchor:hover {
+    background: #fff;
+    scale: 1.1;
+    /* box-shadow: 0 0 0 1px #333, 0 0 0 2px #fff; */
+  }
 }
 
 @layer utilities {

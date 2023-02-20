@@ -3,6 +3,7 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 type ShowModal = {
   weather: boolean;
   todo: boolean;
+  radialMenu: boolean;
 };
 
 type Props = {
@@ -20,7 +21,7 @@ export const ShowModalContextProvider = ({ children }: Props) => {
   const [showModal, setShowModal] = useState<ShowModal>(
     JSON.parse(
       localStorage.getItem('showModal') ??
-        '{"links":false,"weather":false,"todo":false}'
+        '{"weather":false,"todo":false,"radialMenu":false}'
     )
   );
 

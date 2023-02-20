@@ -10,10 +10,11 @@ const Weather = () => {
   const [city, setCity] = useState('');
   const { showModal, setShowModal } = useContext(ShowModalContext);
 
-  const handleToggleData = () => {
+  const handleToggleWeatherData = () => {
     setShowModal({
       weather: !showModal.weather,
       todo: showModal?.todo,
+      radialMenu: showModal.radialMenu,
     });
   };
 
@@ -60,13 +61,13 @@ const Weather = () => {
             weatherData={weatherData}
             setWeatherData={setWeatherData}
             setCity={setCity}
-            handleToggleData={handleToggleData}
+            handleToggleData={handleToggleWeatherData}
           />
         ) : (
           // 概要バージョン
           <WeatherOutline
             weatherData={weatherData}
-            handleToggleData={handleToggleData}
+            handleToggleData={handleToggleWeatherData}
           />
         )}
       </AnimatePresence>

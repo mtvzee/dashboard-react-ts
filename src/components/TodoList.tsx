@@ -20,6 +20,7 @@ const TodoList = () => {
       setShowModal({
         weather: showModal.weather,
         todo: !showModal?.todo,
+        radialMenu: showModal.radialMenu,
       });
     }
     // モーダルを開く時のみinputにフォーカスする
