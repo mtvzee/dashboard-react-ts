@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { WeatherData } from "../types/weather";
-import WeatherHeader from "./WeatherHeader";
+import { motion } from 'framer-motion';
+import { WeatherData } from '../types/weather';
+import WeatherHeader from './WeatherHeader';
 
 type Props = {
   weatherData: WeatherData | null;
@@ -36,8 +36,8 @@ const WeatherDetails = ({
           <div>
             <img
               src={`https://api.openweathermap.org/img/w/${weatherData?.weather[0].icon.replace(
-                "n",
-                "d"
+                'n',
+                'd'
               )}.png`}
               alt="天気のマーク"
               className="w-[60px] h-[45px] object-cover"
@@ -48,7 +48,7 @@ const WeatherDetails = ({
           </div>
           <div>
             <div className="text-[42px] leading-[1.25]">
-              {weatherData?.main.temp}
+              {weatherData?.main.temp.toFixed(1)}
               <span className="text-2xl">℃</span>
             </div>
             <div className="flex items-center space-x-3">
