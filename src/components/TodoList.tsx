@@ -54,7 +54,7 @@ const TodoList = () => {
         className={`absolute top-0 left-0 min-w-[350px] bg-black/20 backdrop-blur-xl rounded-xl ${
           showModal?.todo
             ? '[clip-path:circle(1000px_at_22px_22px)]'
-            : '[clip-path:circle(20px_at_22px_22px)]'
+            : '[clip-path:circle(22px_at_22px_22px)]'
         } transition-[clip-path] duration-700`}
       >
         <button
