@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { ReactNode, useEffect, useState } from 'react';
 import { BackgroundImg } from '../types/background';
 
@@ -7,6 +8,9 @@ type Props = {
 
 const Background = ({ children }: Props) => {
   const [image, setImage] = useState<BackgroundImg>();
+  const savedPhoto = JSON.parse(
+    localStorage.getItem('backgroundImage') ?? '{}'
+  );
 
   useEffect(() => {
     const getBackgroundImage = async () => {
@@ -18,22 +22,28 @@ const Background = ({ children }: Props) => {
         );
         const data = await res.json();
         setImage(data);
+        localStorage.setItem(
+          'backgroundImage',
+          JSON.stringify({
+            accessTime: dayjs().format('YYYY-MM-DD'),
+            photoURL: data.urls.full,
+          })
+        );
       } catch (error) {
         console.error(error);
       }
     };
-    // TODO:unsplashにプロジェクトを登録してアクセス制限の上限を上げる
-    // getBackgroundImage();
+    if (dayjs().format('YYYY-MM-DD') !== savedPhoto.accessTime) {
+      getBackgroundImage();
+    }
   }, []);
 
   return (
     <div
       className="relative h-screen bg-center bg-no-repeat bg-cover"
       style={{
-        backgroundImage:
-          // TODO:unsplashにプロジェクトを登録してアクセス制限の上限を上げて、URLを切り替える
-          // `url(${image?.urls.full})`
-          'url(https://source.unsplash.com/random)',
+        backgroundImage: `url(${savedPhoto.photoURL ?? image?.urls.full})`,
+        // 'url(https://source.unsplash.com/random)',
       }}
     >
       {children}
